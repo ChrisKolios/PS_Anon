@@ -9,7 +9,7 @@
   <style>
     /* --- CSS DESIGN SYSTEM --- */
     :root {
-      var(--primary): #475569; 
+      --primary: #475569; 
       --primary-hover: #334155;
       --bg: #f1f5f9; 
       --surface: #ffffff;
@@ -36,7 +36,7 @@
     .main-content {
       margin: 0 auto; 
       padding: 4rem 2rem;
-      max-width: 850px; /* Slightly narrower for better reading length */
+      max-width: 850px; 
     }
 
     section {
@@ -51,6 +51,9 @@
 
     /* --- HERO SECTION --- */
     .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Forces perfect centering for all children */
       text-align: center;
       background: transparent;
       border: none;
@@ -108,13 +111,13 @@
       font-size: 1.75rem; 
       margin-bottom: 1.5rem; 
       color: var(--text); 
-      text-align: center; /* Centered section titles */
+      text-align: center; 
     }
     
     p { 
       margin-bottom: 1.2rem; 
       color: #334155; 
-      text-align: justify; /* Academic justified text alignment */
+      text-align: justify; 
     }
     
     p:last-child { 
@@ -156,19 +159,20 @@
       border-radius: 8px;
       overflow: hidden;
       aspect-ratio: 16 / 9;
+      margin-bottom: 1rem;
     }
     video { width: 100%; height: 100%; object-fit: cover; }
     
     .evidence-note {
       font-size: 0.85rem;
       color: var(--text-muted);
-      margin-top: 1rem;
-      text-align: center; /* Overrides the justify for captions */
+      margin-top: 0.5rem;
+      text-align: center; 
       font-style: italic;
     }
     
     .intro-text {
-      text-align: center; /* Centers short intro descriptions */
+      text-align: center; 
     }
 
     /* --- RESPONSIVE DESIGN --- */
@@ -176,7 +180,7 @@
       .main-content { padding: 2rem 1rem; }
       .hero h1 { font-size: 2rem; }
       section { padding: 1.5rem; }
-      p { text-align: left; } /* Revert to left-align on mobile for readability */
+      p { text-align: left; } 
     }
   </style>
 </head>
@@ -192,7 +196,7 @@
       <p class="authors">Anonymous Authors</p>
       
       <div class="pill-container">
-        <a class="pill" href="#supplementary-results">Watch Videos</a>
+        <a class="pill" href="#primary-video">Watch Primary Video</a>
       </div>
     </header>
 
@@ -208,10 +212,24 @@
       <p>A detailed overview of the system architecture, algorithms, and technical approaches goes here.</p>
     </section>
 
+    <!-- PRIMARY VIDEO SECTION -->
+    <section id="primary-video">
+      <h2>Primary Demonstration</h2>
+      <p class="intro-text">An overview of the proposed method and main results.</p>
+      
+      <div class="video-stage">
+        <video controls playsinline poster="primary-poster.jpg">
+          <source src="primary-video.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <p class="evidence-note">Full system demonstration highlighting core capabilities.</p>
+    </section>
+
     <!-- SUPPLEMENTARY RESULTS SECTION -->
     <section id="supplementary-results">
       <h2>Supplementary Results</h2>
-      <p class="intro-text">Description of what these video demonstrations and additional experiments show.</p>
+      <p class="intro-text">Additional video demonstrations and extended experiment sequences.</p>
       
       <!-- Video Tabs -->
       <div class="video-tabs" id="video-tabs">
@@ -227,14 +245,13 @@
         </video>
       </div>
       <p class="evidence-note" id="video-caption">Dataset A · Sequence 1 · Target Speed · 1:00</p>
-      <p class="evidence-note">Technical details about how this video was recorded, hardware used, or specific algorithm configurations enabled during this run.</p>
     </section>
 
   </main>
 
   <!-- INTERACTIVE JAVASCRIPT -->
   <script>
-    // Video Tab Switching Logic
+    // Video Tab Switching Logic (Only affects the Supplementary Results player)
     const tabs = document.querySelectorAll('.video-tabs button');
     const videoElement = document.getElementById('demo-video');
     const videoSource = document.getElementById('video-source');
