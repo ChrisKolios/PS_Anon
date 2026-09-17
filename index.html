@@ -9,8 +9,7 @@
   <style>
     /* --- CSS DESIGN SYSTEM --- */
     :root {
-      /* Changed to an academic slate gray */
-      --primary: #475569; 
+      var(--primary): #475569; 
       --primary-hover: #334155;
       --bg: #f1f5f9; 
       --surface: #ffffff;
@@ -35,17 +34,16 @@
 
     /* --- MAIN CONTENT LAYOUT --- */
     .main-content {
-      /* Centered layout now that sidebar is gone */
       margin: 0 auto; 
       padding: 4rem 2rem;
-      max-width: 900px;
+      max-width: 850px; /* Slightly narrower for better reading length */
     }
 
     section {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 2.5rem;
+      padding: 3rem;
       margin-bottom: 2rem;
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
       scroll-margin-top: 2rem;
@@ -106,9 +104,22 @@
     }
 
     /* --- TYPOGRAPHY & SECTIONS --- */
-    h2 { font-size: 1.75rem; margin-bottom: 1.2rem; border-bottom: 2px solid var(--bg); padding-bottom: 0.5rem; color: var(--text); }
-    p { margin-bottom: 1.2rem; color: #334155; }
-    p:last-child { margin-bottom: 0; }
+    h2 { 
+      font-size: 1.75rem; 
+      margin-bottom: 1.5rem; 
+      color: var(--text); 
+      text-align: center; /* Centered section titles */
+    }
+    
+    p { 
+      margin-bottom: 1.2rem; 
+      color: #334155; 
+      text-align: justify; /* Academic justified text alignment */
+    }
+    
+    p:last-child { 
+      margin-bottom: 0; 
+    }
 
     /* --- VIDEO TABS --- */
     .video-tabs {
@@ -129,6 +140,7 @@
       color: var(--text-muted);
       cursor: pointer;
       transition: all 0.2s;
+      text-align: center;
     }
     .video-tabs button[aria-pressed="true"] {
       background: var(--surface);
@@ -151,8 +163,12 @@
       font-size: 0.85rem;
       color: var(--text-muted);
       margin-top: 1rem;
-      text-align: center;
+      text-align: center; /* Overrides the justify for captions */
       font-style: italic;
+    }
+    
+    .intro-text {
+      text-align: center; /* Centers short intro descriptions */
     }
 
     /* --- RESPONSIVE DESIGN --- */
@@ -160,6 +176,7 @@
       .main-content { padding: 2rem 1rem; }
       .hero h1 { font-size: 2rem; }
       section { padding: 1.5rem; }
+      p { text-align: left; } /* Revert to left-align on mobile for readability */
     }
   </style>
 </head>
@@ -175,7 +192,7 @@
       <p class="authors">Anonymous Authors</p>
       
       <div class="pill-container">
-        <a class="pill" href="#supplementary-results">🎥 Watch Videos</a>
+        <a class="pill" href="#supplementary-results">Watch Videos</a>
       </div>
     </header>
 
@@ -194,7 +211,7 @@
     <!-- SUPPLEMENTARY RESULTS SECTION -->
     <section id="supplementary-results">
       <h2>Supplementary Results</h2>
-      <p>Description of what these video demonstrations and additional experiments show.</p>
+      <p class="intro-text">Description of what these video demonstrations and additional experiments show.</p>
       
       <!-- Video Tabs -->
       <div class="video-tabs" id="video-tabs">
