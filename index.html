@@ -229,7 +229,6 @@
       <a href="#home">↑ Back to Top</a>
       <a href="#abstract">Abstract</a>
       <a href="#videos">Videos</a>
-      <a href="#availability">Paper & Code</a>
     </nav>
   </aside>
 
@@ -243,8 +242,6 @@
       <p class="authors">Anonymous Authors</p>
       
       <div class="pill-container">
-        <a class="pill" href="#availability">📄 Paper <small>Pending</small></a>
-        <a class="pill" href="#availability">💻 Code <small>Pending</small></a>
         <a class="pill" href="#videos">🎥 Watch Videos</a>
       </div>
     </header>
@@ -258,30 +255,24 @@
     <!-- VIDEOS SECTION -->
     <section id="videos">
       <h2>PS in Action</h2>
-      <p>Description.</p>
+      <p>Description of what these video demonstrations show.</p>
       
       <!-- Video Tabs -->
       <div class="video-tabs" id="video-tabs">
-        <button type="button" aria-pressed="true" data-vid-src="videos/mh05.mp4" data-poster="videos/mh05-poster.jpg" data-caption="EuRoC · MH05 · 50 Hz replay target · 0:55">EuRoC · MH05</button>
-        <button type="button" aria-pressed="false" data-vid-src="videos/room1.mp4" data-poster="videos/room1-poster.jpg" data-caption="TUM-VI · ROOM1 · Replay demonstration">TUM-VI · ROOM1</button>
+        <button type="button" aria-pressed="true" data-vid-src="video1.mp4" data-poster="poster1.jpg" data-caption="Dataset A · Sequence 1 · Target Speed · 1:00">Dataset A · Sequence 1</button>
+        <button type="button" aria-pressed="false" data-vid-src="video2.mp4" data-poster="poster2.jpg" data-caption="Dataset B · Sequence 2 · Demonstration Details">Dataset B · Sequence 2</button>
       </div>
 
       <!-- Video Player -->
       <div class="video-stage">
         <!-- Add 'muted' if you want it to autoplay reliably in modern browsers -->
-        <video id="demo-video" controls playsinline poster="videos/mh05-poster.jpg">
-          <source id="video-source" src="videos/mh05.mp4" type="video/mp4">
+        <video id="demo-video" controls playsinline poster="poster1.jpg">
+          <source id="video-source" src="video1.mp4" type="video/mp4">
           Your browser does not support the video tag.
         </video>
       </div>
-      <p class="evidence-note" id="video-caption">EuRoC · MH05 · 50 Hz replay target · 0:55</p>
-      <p class="evidence-note">Async + joint-acceptance initialization + Student-<em>t</em>. Recording and rendering overhead are included; these demonstration runs are separate from the timing and accuracy benchmarks.</p>
-    </section>
-
-    <!-- AVAILABILITY SECTION -->
-    <section id="availability">
-      <h2>Paper &amp; Code</h2>
-      <p>This repository is currently prepared for double-blind peer review. The full manuscript (PDF) will be updated here following the arXiv release and review process.</p>
+      <p class="evidence-note" id="video-caption">Dataset A · Sequence 1 · Target Speed · 1:00</p>
+      <p class="evidence-note">Technical details about how this video was recorded, hardware used, or specific algorithm configurations enabled during this run.</p>
     </section>
 
   </main>
