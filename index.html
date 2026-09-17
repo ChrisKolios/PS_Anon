@@ -3,27 +3,37 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Double-blind review: keep crawlers out and do not send a referrer on outbound clicks. -->
   <meta name="robots" content="noindex, nofollow, noarchive">
-  <title>PS | Supplementary Page</title>
+  <meta name="referrer" content="no-referrer">
+  <meta name="description" content="Anonymous supplementary page for Pow3R-SLAM: Real-Time RGB-D SLAM with 3D Reconstruction Priors.">
+  <title>Pow3R-SLAM | Supplementary Page</title>
 
   <style>
-    /* --- CSS DESIGN SYSTEM --- */
+    /* ---------- Design tokens ---------- */
     :root {
-      --primary: #475569; 
+      color-scheme: light;
+      --primary: #475569;
       --primary-hover: #334155;
-      --bg: #f1f5f9; 
+      --bg: #f1f5f9;
       --surface: #ffffff;
       --text: #0f172a;
+      --text-body: #334155;
       --text-muted: #64748b;
       --border: #e2e8f0;
+      --fig-depth: #1f6fb5;   /* "Blue" in Fig. 2 (figdepth) */
+      --fig-opt: #b25e0e;     /* "Orange" in Fig. 2 (figopt) */
       --radius: 12px;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; }
+    * { margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background-color: var(--bg);
+      background: var(--bg);
       color: var(--text);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
@@ -32,34 +42,43 @@
     a { color: var(--primary); text-decoration: none; font-weight: 500; }
     a:hover { color: var(--primary-hover); text-decoration: underline; }
 
-    /* --- MAIN CONTENT LAYOUT --- */
+    :focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+    img { display: block; max-width: 100%; height: auto; }
+
+    /* ---------- Main layout ---------- */
     .main-content {
-      margin: 0 auto; 
-      padding: 4rem 2rem;
-      max-width: 850px; 
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
     }
 
-    section {
+    .card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 3rem;
+      padding: 2.5rem;
       margin-bottom: 2rem;
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
       scroll-margin-top: 2rem;
     }
 
-    /* --- HERO SECTION --- */
+    h2 {
+      font-size: 1.75rem;
+      line-height: 1.3;
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--bg);
+    }
+
+    p { color: var(--text-body); }
+    p + p { margin-top: 1.2rem; }
+
+    /* ---------- Hero ---------- */
     .hero {
-      display: flex;
-      flex-direction: column;
-      align-items: center; /* Forces perfect centering for all children */
       text-align: center;
-      background: transparent;
-      border: none;
-      box-shadow: none;
-      padding-top: 1rem;
-      padding-bottom: 2rem;
+      padding: 2rem 0 3rem;
+      scroll-margin-top: 2rem;
     }
 
     .hero .tagline {
@@ -71,11 +90,13 @@
       margin-bottom: 1rem;
     }
 
+    .nowrap { white-space: nowrap; }
+
     .hero h1 {
       font-size: 2.5rem;
       line-height: 1.2;
+      text-wrap: balance;
       margin-bottom: 1.5rem;
-      color: var(--text);
     }
 
     .hero .authors {
@@ -84,193 +105,228 @@
       margin-bottom: 2.5rem;
     }
 
-    /* Pill Buttons */
-    .pill-container { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+    .pill-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; }
     .pill {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 0.6rem 1.2rem;
-      border-radius: 99px;
-      font-weight: 600;
-      font-size: 0.9rem;
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      transition: all 0.2s;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      padding: 0.6rem 1.2rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 0.9rem;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      transition: border-color 0.2s, color 0.2s;
     }
-    .pill:hover {
-      border-color: var(--primary);
-      color: var(--primary);
-      text-decoration: none;
-    }
+    .pill:hover { border-color: var(--primary); color: var(--primary); text-decoration: none; }
 
-    /* --- TYPOGRAPHY & SECTIONS --- */
-    h2 { 
-      font-size: 1.75rem; 
-      margin-bottom: 1.5rem; 
-      color: var(--text); 
-      text-align: center; 
-    }
-    
-    p { 
-      margin-bottom: 1.2rem; 
-      color: #334155; 
-      text-align: justify; 
-    }
-    
-    p:last-child { 
-      margin-bottom: 0; 
-    }
+    /* ---------- Abstract ---------- */
+    .abstract p { text-align: justify; hyphens: auto; }
 
-    /* --- VIDEO TABS --- */
+    /* ---------- Pipeline figure ---------- */
+    .figure-scroll {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #fff;
+    }
+    .figure-scroll img { width: 100%; min-width: 720px; }
+
+    figure figcaption {
+      margin-top: 1rem;
+      font-size: 0.92rem;
+      color: var(--text-body);
+    }
+    figcaption .label { font-weight: 700; color: var(--text); }
+    .c-depth { color: var(--fig-depth); font-weight: 700; }
+    .c-opt { color: var(--fig-opt); font-weight: 700; }
+    .figure-links { margin-top: 0.75rem; font-size: 0.85rem; color: var(--text-muted); }
+
+    /* ---------- Videos ---------- */
     .video-tabs {
       display: flex;
+      flex-wrap: wrap;
       gap: 0.5rem;
       margin-bottom: 1.5rem;
-      background: var(--bg);
       padding: 0.5rem;
+      background: var(--bg);
       border-radius: 8px;
     }
     .video-tabs button {
-      flex: 1;
+      flex: 1 1 10rem;
       padding: 0.75rem 1rem;
       border: none;
-      background: transparent;
       border-radius: 6px;
-      font-weight: 600;
+      background: transparent;
       color: var(--text-muted);
+      font: inherit;
+      font-weight: 600;
       cursor: pointer;
-      transition: all 0.2s;
-      text-align: center;
+      transition: background 0.2s, color 0.2s;
     }
     .video-tabs button[aria-pressed="true"] {
       background: var(--surface);
       color: var(--primary);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     }
 
-    /* --- VIDEO PLAYER --- */
+    .intro { margin-bottom: 1.5rem; }
+
     .video-stage {
-      position: relative;
-      width: 100%;
+      aspect-ratio: 16 / 9;
       background: #000;
       border-radius: 8px;
       overflow: hidden;
-      aspect-ratio: 16 / 9;
-      margin-bottom: 1rem;
     }
-    video { width: 100%; height: 100%; object-fit: cover; }
-    
-    .evidence-note {
+    .video-stage video { display: block; width: 100%; height: 100%; object-fit: contain; }
+
+    .note {
+      margin-top: 1rem;
       font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-top: 0.5rem;
-      text-align: center; 
       font-style: italic;
-    }
-    
-    .intro-text {
-      text-align: center; 
+      text-align: center;
+      color: var(--text-muted);
     }
 
-    /* --- RESPONSIVE DESIGN --- */
+    /* ---------- Responsive ---------- */
     @media (max-width: 800px) {
-      .main-content { padding: 2rem 1rem; }
+      .main-content { padding: 1.5rem 1rem; }
       .hero h1 { font-size: 2rem; }
-      section { padding: 1.5rem; }
-      p { text-align: left; } 
+      .card { padding: 1.5rem; }
+      .abstract p { text-align: left; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
     }
   </style>
 </head>
 <body>
 
-  <!-- MAIN CONTENT -->
   <main class="main-content">
-    
-    <!-- HERO SECTION -->
-    <header class="hero" id="home">
+
+    <header class="hero">
       <p class="tagline">Supplementary Project Page</p>
-      <h1>PS Test</h1>
+      <h1>Pow3R-SLAM: Real-Time <span class="nowrap">RGB-D</span> SLAM with 3D Reconstruction Priors</h1>
       <p class="authors">Anonymous Authors</p>
-      
+
       <div class="pill-container">
         <a class="pill" href="#primary-video">Watch Primary Video</a>
       </div>
     </header>
 
-    <!-- ABSTRACT SECTION -->
-    <section id="abstract">
-      <h2>Abstract</h2>
-      <p>WIP</p>
+    <section class="card abstract" id="abstract" aria-labelledby="abstract-title">
+      <h2 id="abstract-title">Abstract</h2>
+      <p>
+        We present Pow3R-SLAM, a real-time RGB-D simultaneous localization and mapping (SLAM) system
+        that uses Pow3R for tracking and mapping. Inspired by MASt3R-SLAM, a recent work on monocular
+        SLAM using two-view 3D reconstruction priors, we extend the work to incorporate depth as a prior
+        on the network’s prediction, rather than as geometry to fuse. Where traditional RGB-D SLAM
+        systems struggle with sparsity in the depth images, Pow3R utilizes the available depth to give
+        a better-conditioned pointmap, while inferring the depths in empty regions from the two-view
+        photometric, depth, and intrinsic data. Evaluated against MASt3R-SLAM following its protocol on
+        24 sequences from TUM, 7-Scenes, and Replica, Pow3R-SLAM runs 1.6× faster in wall time, has 15%
+        lower mean trajectory error, a 3.1× lower unscaled error, and produces denser maps, with a 30%
+        lower Chamfer distance. We also introduce a hybrid variant that runs 2.1× faster than
+        MASt3R-SLAM at 25.3 frames per second (FPS), while maintaining improved tracking and mapping
+        accuracy. Against ORB-SLAM3 in RGB-D mode, Pow3R-SLAM is more accurate on TUM, 7-Scenes, and
+        ETH3D-SLAM, and completes every TUM sequence. While Pow3R-SLAM can struggle on a small set of
+        self-similar scenes, its overall performance shows that adding depth as a prior for two-view 3D
+        reconstruction SLAM can be beneficial. Code will be made open-source upon acceptance.
+      </p>
     </section>
 
-    <!-- METHOD SECTION -->
-    <section id="method">
-      <h2>Method</h2>
-      <p>A detailed overview of the system architecture, algorithms, and technical approaches goes here.</p>
+    <section class="card" id="method" aria-labelledby="method-title">
+      <h2 id="method-title">Method Overview</h2>
+      <figure>
+        <div class="figure-scroll">
+          <img src="Fig2_pipeline_website.png"
+               srcset="Fig2_pipeline_website_1200.png 1200w, Fig2_pipeline_website.png 2400w"
+               sizes="(max-width: 800px) 720px, 880px"
+               width="2400" height="627"
+               alt="Pow3R-SLAM pipeline diagram. Inputs (intrinsics, keyframe and frame images, sensor depth) feed a front end of depth-conditioned Pow3R, metric scaling and tracking, and a backend of loop closure and depth-anchored global optimization, producing a metric trajectory and a dense metric map. An optional hybrid branch tracks alternate frames by ICP.">
+        </div>
+        <figcaption>
+          <span class="label">Fig. 2. Pow3R-SLAM pipeline.</span>
+          Pow3R-SLAM is an RGB-D SLAM system that uses sensor depth as a prior on a two-view pointmap
+          network. The front end (1-3) runs on every frame. (1) Pow3R predicts pointmaps and confidences
+          for the frame and its keyframe, conditioned on sensor depth and intrinsics (Sec. III-B).
+          (2) Each prediction is made metric against the sensor depth (Eq. 1). (3) The frame is tracked
+          in <b>Sim</b>(3) and may become a keyframe (Secs. III-C–III-D). The backend (4, 5) runs on
+          every new keyframe. (4) Loop closure on Pow3R’s encoder tokens adds edges in familiar
+          locations, and relocalization locates frames the tracker has lost. (5) A global optimization
+          refines every keyframe pose, with keyframe depths anchored to the sensor and
+          confidence-calibrated edges (Sec. III-E.3, Eqs. 5–7).
+          <span class="c-depth">Blue</span>: the sensor-depth path.
+          <span class="c-opt">Orange</span>: optional components, including the hybrid variant, which
+          tracks alternate frames by ICP instead of Pow3R (Sec. III-G), and map-only keyframes
+          (Sec. III-F). ICP frames never become keyframes, so every keyframe comes from a Pow3R pass.
+          Inputs and outputs: <i>TUM fr1/desk</i>.
+        </figcaption>
+        <p class="figure-links"><a href="Fig2_pipeline_website.pdf">Open the vector figure (PDF)</a></p>
+      </figure>
     </section>
 
-    <!-- PRIMARY VIDEO SECTION -->
-    <section id="primary-video">
-      <h2>Primary Demonstration</h2>
-      <p class="intro-text">An overview of the proposed method and main results.</p>
-      
+    <section class="card" id="primary-video" aria-labelledby="primary-video-title">
+      <h2 id="primary-video-title">Primary Demonstration</h2>
+      <p class="intro">An overview of the proposed method and main results.</p>
+
       <div class="video-stage">
-        <video controls playsinline poster="primary-poster.jpg">
-          <source src="primary-video.mp4" type="video/mp4">
+        <video controls playsinline preload="metadata" src="primary-video.mp4" poster="primary-poster.jpg">
           Your browser does not support the video tag.
         </video>
       </div>
-      <p class="evidence-note">Full system demonstration highlighting core capabilities.</p>
+      <p class="note">Full system demonstration highlighting core capabilities.</p>
     </section>
 
-    <!-- SUPPLEMENTARY RESULTS SECTION -->
-    <section id="supplementary-results">
-      <h2>Supplementary Results</h2>
-      <p class="intro-text">Additional video demonstrations and extended experiment sequences.</p>
-      
-      <!-- Video Tabs -->
-      <div class="video-tabs" id="video-tabs">
-        <button type="button" aria-pressed="true" data-vid-src="video1.mp4" data-poster="poster1.jpg" data-caption="Dataset A · Sequence 1 · Target Speed · 1:00">Dataset A · Sequence 1</button>
-        <button type="button" aria-pressed="false" data-vid-src="video2.mp4" data-poster="poster2.jpg" data-caption="Dataset B · Sequence 2 · Demonstration Details">Dataset B · Sequence 2</button>
+    <section class="card" id="supplementary-results" aria-labelledby="supplementary-title">
+      <h2 id="supplementary-title">Supplementary Results</h2>
+      <p class="intro">Additional video demonstrations and extended experiment sequences.</p>
+
+      <!-- TODO: set each tab's label, video, poster and caption to the final supplementary videos. -->
+      <div class="video-tabs" role="group" aria-label="Choose a supplementary video">
+        <button type="button" aria-pressed="true"
+                data-src="video1.mp4" data-poster="poster1.jpg"
+                data-caption="Dataset A · Sequence 1 · Target Speed · 1:00">Dataset A · Sequence 1</button>
+        <button type="button" aria-pressed="false"
+                data-src="video2.mp4" data-poster="poster2.jpg"
+                data-caption="Dataset B · Sequence 2 · Demonstration Details">Dataset B · Sequence 2</button>
       </div>
 
-      <!-- Video Player -->
       <div class="video-stage">
-        <video id="demo-video" controls playsinline poster="poster1.jpg">
-          <source id="video-source" src="video1.mp4" type="video/mp4">
+        <video id="demo-video" controls playsinline preload="metadata" src="video1.mp4" poster="poster1.jpg">
           Your browser does not support the video tag.
         </video>
       </div>
-      <p class="evidence-note" id="video-caption">Dataset A · Sequence 1 · Target Speed · 1:00</p>
+      <p class="note" id="video-caption" aria-live="polite">Dataset A · Sequence 1 · Target Speed · 1:00</p>
+    </section>
+
+    <section class="card" id="availability" aria-labelledby="availability-title">
+      <h2 id="availability-title">Paper &amp; Code</h2>
+      <p>
+        This page is prepared for double-blind peer review. The full manuscript (PDF) and the code will
+        be released here after the review process.
+      </p>
     </section>
 
   </main>
 
-  <!-- INTERACTIVE JAVASCRIPT -->
   <script>
-    // Video Tab Switching Logic (Only affects the Supplementary Results player)
+    // Supplementary Results tabs (the primary video player is separate)
     const tabs = document.querySelectorAll('.video-tabs button');
-    const videoElement = document.getElementById('demo-video');
-    const videoSource = document.getElementById('video-source');
-    const videoCaption = document.getElementById('video-caption');
+    const video = document.getElementById('demo-video');
+    const caption = document.getElementById('video-caption');
 
     tabs.forEach(tab => {
       tab.addEventListener('click', () => {
-        // Reset all buttons
-        tabs.forEach(t => t.setAttribute('aria-pressed', 'false'));
-        // Highlight active button
-        tab.setAttribute('aria-pressed', 'true');
-
-        // Update Video and Caption
-        videoElement.poster = tab.getAttribute('data-poster');
-        videoSource.src = tab.getAttribute('data-vid-src');
-        videoCaption.innerText = tab.getAttribute('data-caption');
-        
-        // Reload video element to apply new source
-        videoElement.load();
+        tabs.forEach(t => t.setAttribute('aria-pressed', String(t === tab)));
+        video.poster = tab.dataset.poster;
+        video.src = tab.dataset.src;
+        caption.textContent = tab.dataset.caption;
+        video.load();
       });
     });
   </script>
