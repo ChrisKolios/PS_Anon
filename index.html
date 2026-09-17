@@ -9,14 +9,14 @@
   <style>
     /* --- CSS DESIGN SYSTEM --- */
     :root {
-      --primary: #2563eb;
-      --primary-hover: #1d4ed8;
-      --bg: #f8fafc;
+      /* Changed to an academic slate gray */
+      --primary: #475569; 
+      --primary-hover: #334155;
+      --bg: #f1f5f9; 
       --surface: #ffffff;
       --text: #0f172a;
       --text-muted: #64748b;
       --border: #e2e8f0;
-      --sidebar-width: 240px;
       --radius: 12px;
     }
 
@@ -30,64 +30,14 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    a { color: var(--primary); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-
-    /* --- SIDEBAR NAVIGATION --- */
-    .sidebar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: var(--sidebar-width);
-      height: 100vh;
-      background: var(--surface);
-      border-right: 1px solid var(--border);
-      padding: 2rem 1.5rem;
-      overflow-y: auto;
-      z-index: 100;
-      transition: transform 0.3s ease;
-    }
-
-    .sidebar h3 {
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--text-muted);
-      margin-bottom: 1rem;
-    }
-
-    .sidebar nav { display: flex; flex-direction: column; gap: 0.75rem; }
-    .sidebar nav a {
-      color: var(--text);
-      font-weight: 500;
-      padding: 0.5rem 0.75rem;
-      border-radius: 6px;
-      transition: background 0.2s;
-    }
-    .sidebar nav a:hover { background: var(--bg); text-decoration: none; }
-
-    /* --- MOBILE MENU TOGGLE --- */
-    .menu-toggle {
-      display: none;
-      position: fixed;
-      bottom: 1.5rem;
-      right: 1.5rem;
-      background: var(--primary);
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      font-size: 1.5rem;
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
-      z-index: 101;
-      cursor: pointer;
-    }
+    a { color: var(--primary); text-decoration: none; font-weight: 500; }
+    a:hover { color: var(--primary-hover); text-decoration: underline; }
 
     /* --- MAIN CONTENT LAYOUT --- */
     .main-content {
-      margin-left: var(--sidebar-width);
-      padding: 3rem 2rem;
+      /* Centered layout now that sidebar is gone */
+      margin: 0 auto; 
+      padding: 4rem 2rem;
       max-width: 900px;
     }
 
@@ -97,7 +47,7 @@
       border-radius: var(--radius);
       padding: 2.5rem;
       margin-bottom: 2rem;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
       scroll-margin-top: 2rem;
     }
 
@@ -107,8 +57,8 @@
       background: transparent;
       border: none;
       box-shadow: none;
-      padding-top: 2rem;
-      padding-bottom: 1rem;
+      padding-top: 1rem;
+      padding-bottom: 2rem;
     }
 
     .hero .tagline {
@@ -130,7 +80,7 @@
     .hero .authors {
       font-size: 1.2rem;
       color: var(--text-muted);
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
     }
 
     /* Pill Buttons */
@@ -154,10 +104,9 @@
       color: var(--primary);
       text-decoration: none;
     }
-    .pill small { opacity: 0.6; font-weight: 400; }
 
     /* --- TYPOGRAPHY & SECTIONS --- */
-    h2 { font-size: 1.75rem; margin-bottom: 1.2rem; border-bottom: 2px solid var(--bg); padding-bottom: 0.5rem; }
+    h2 { font-size: 1.75rem; margin-bottom: 1.2rem; border-bottom: 2px solid var(--bg); padding-bottom: 0.5rem; color: var(--text); }
     p { margin-bottom: 1.2rem; color: #334155; }
     p:last-child { margin-bottom: 0; }
 
@@ -208,29 +157,13 @@
 
     /* --- RESPONSIVE DESIGN --- */
     @media (max-width: 800px) {
-      .sidebar { transform: translateX(-100%); }
-      .sidebar.open { transform: translateX(0); box-shadow: 4px 0 24px rgba(0,0,0,0.1); }
-      .main-content { margin-left: 0; padding: 1.5rem 1rem; }
-      .menu-toggle { display: block; }
+      .main-content { padding: 2rem 1rem; }
       .hero h1 { font-size: 2rem; }
       section { padding: 1.5rem; }
     }
   </style>
 </head>
 <body>
-
-  <!-- MOBILE MENU BUTTON -->
-  <button class="menu-toggle" id="menu-toggle" aria-label="Toggle Navigation">☰</button>
-
-  <!-- SIDEBAR NAVIGATION -->
-  <aside class="sidebar" id="sidebar">
-    <h3>On This Page</h3>
-    <nav>
-      <a href="#home">↑ Back to Top</a>
-      <a href="#abstract">Abstract</a>
-      <a href="#videos">Videos</a>
-    </nav>
-  </aside>
 
   <!-- MAIN CONTENT -->
   <main class="main-content">
@@ -242,7 +175,7 @@
       <p class="authors">Anonymous Authors</p>
       
       <div class="pill-container">
-        <a class="pill" href="#videos">🎥 Watch Videos</a>
+        <a class="pill" href="#supplementary-results">🎥 Watch Videos</a>
       </div>
     </header>
 
@@ -252,10 +185,16 @@
       <p>WIP</p>
     </section>
 
-    <!-- VIDEOS SECTION -->
-    <section id="videos">
-      <h2>PS in Action</h2>
-      <p>Description of what these video demonstrations show.</p>
+    <!-- METHOD SECTION -->
+    <section id="method">
+      <h2>Method</h2>
+      <p>A detailed overview of the system architecture, algorithms, and technical approaches goes here.</p>
+    </section>
+
+    <!-- SUPPLEMENTARY RESULTS SECTION -->
+    <section id="supplementary-results">
+      <h2>Supplementary Results</h2>
+      <p>Description of what these video demonstrations and additional experiments show.</p>
       
       <!-- Video Tabs -->
       <div class="video-tabs" id="video-tabs">
@@ -265,7 +204,6 @@
 
       <!-- Video Player -->
       <div class="video-stage">
-        <!-- Add 'muted' if you want it to autoplay reliably in modern browsers -->
         <video id="demo-video" controls playsinline poster="poster1.jpg">
           <source id="video-source" src="video1.mp4" type="video/mp4">
           Your browser does not support the video tag.
@@ -279,26 +217,7 @@
 
   <!-- INTERACTIVE JAVASCRIPT -->
   <script>
-    // 1. Mobile Sidebar Toggle Logic
-    const menuBtn = document.getElementById('menu-toggle');
-    const sidebar = document.getElementById('sidebar');
-    
-    menuBtn.addEventListener('click', () => {
-      sidebar.classList.toggle('open');
-      menuBtn.innerHTML = sidebar.classList.contains('open') ? '✕' : '☰';
-    });
-
-    // Close sidebar if clicking a link on mobile
-    sidebar.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        if (window.innerWidth <= 800) {
-          sidebar.classList.remove('open');
-          menuBtn.innerHTML = '☰';
-        }
-      });
-    });
-
-    // 2. Video Tab Switching Logic
+    // Video Tab Switching Logic
     const tabs = document.querySelectorAll('.video-tabs button');
     const videoElement = document.getElementById('demo-video');
     const videoSource = document.getElementById('video-source');
